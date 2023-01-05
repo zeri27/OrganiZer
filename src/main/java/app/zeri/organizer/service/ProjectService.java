@@ -51,4 +51,12 @@ public class ProjectService {
             throw new ProjectDoesNotExistException();
         }
     }
+
+    public boolean projectExists(String projectName, String companyName) throws ProjectDoesNotExistException {
+        if(projectRepository.existsProjectByProjectNameAndCompanyName(projectName, companyName)) {
+            return true;
+        } else {
+            throw new ProjectDoesNotExistException();
+        }
+    }
 }

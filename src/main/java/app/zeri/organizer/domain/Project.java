@@ -18,13 +18,19 @@ public class Project {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String projectName;
-    private String companyName;
     private String projectDescription;
+    private String companyName;
     private int tasks = 0;
     @ElementCollection
     private List<String> usersAssigned = new ArrayList<>();
     @ElementCollection
     private List<String> taskNames = new ArrayList<>();
+
+    public Project(String projectName, String projectDescription, String companyName) {
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.companyName = companyName;
+    }
 
     public void assignUserToProjct(String emailAddress) {
         usersAssigned.add(emailAddress);

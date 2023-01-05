@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel {
-
-    String firstName;
-    String lastName;
-    String emailAddress;
-    String password;
+public class ProjectModel {
+    String projectName;
+    String projectDescription;
+    String companyName;
 }

@@ -9,10 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel {
-
-    String firstName;
-    String lastName;
+public class LogOutModel {
     String emailAddress;
-    String password;
 }

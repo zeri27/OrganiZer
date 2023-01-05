@@ -23,10 +23,27 @@ public class User {
     private String firstName;
     private String lastName;
     private String emailAddress;
+    private String password;
     @ElementCollection
     private List<String> companies = new ArrayList<>();
     @ElementCollection
     private List<String> projects = new ArrayList<>();
+    private boolean authentication = false;
+
+    public User(String firstName, String lastName, String emailAddress, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
+
+    public void authenticateUser() {
+        this.authentication = true;
+    }
+
+    public void deauthenticateUser() {
+        this.authentication = false;
+    }
 
     public void assignProject(String project) {
         this.projects.add(project);

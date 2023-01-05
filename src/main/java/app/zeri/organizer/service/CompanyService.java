@@ -52,4 +52,12 @@ public class CompanyService {
             throw new CompanyDoesNotExistException();
         }
     }
+
+    public boolean companyExists(String companyName) throws CompanyDoesNotExistException {
+        if(companyRepository.existsCompanyByCompanyName(companyName)) {
+            return true;
+        } else {
+            throw new CompanyDoesNotExistException();
+        }
+    }
 }

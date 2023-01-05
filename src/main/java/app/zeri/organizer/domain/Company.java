@@ -28,6 +28,11 @@ public class Company {
     @ElementCollection
     private List<String> projects = new ArrayList<>();
 
+    public Company(String companyName, String companyDescription) {
+        this.companyName = companyName;
+        this.companyDescription = companyDescription;
+    }
+
     public void addUserToCompany(String userEmailAddress) {
         users.add(userEmailAddress);
     }
