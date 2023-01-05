@@ -20,7 +20,7 @@ public class Project {
     private String projectName;
     private String projectDescription;
     private String companyName;
-    private int tasks = 0;
+    private int tasks = 1;
     @ElementCollection
     private List<String> usersAssigned = new ArrayList<>();
     @ElementCollection
@@ -32,7 +32,7 @@ public class Project {
         this.companyName = companyName;
     }
 
-    public void assignUserToProjct(String emailAddress) {
+    public void assignUserToProject(String emailAddress) {
         usersAssigned.add(emailAddress);
     }
 

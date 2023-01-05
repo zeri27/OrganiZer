@@ -28,6 +28,23 @@ public class Task {
     @ElementCollection
     private List<String> usersAssigned = new ArrayList<>();
 
+    public Task(
+            int taskNumber,
+            String taskName,
+            String taskDescription,
+            String dateAdded,
+            String deadline,
+            String projectName,
+            String companyName) {
+        this.taskNumber = taskNumber;
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.dateAdded = dateAdded;
+        this.deadline = deadline;
+        this.projectName = projectName;
+        this.companyName = companyName;
+    }
+
     public void assignUser(String userEmailAddress) {
         usersAssigned.add(userEmailAddress);
     }

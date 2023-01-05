@@ -2,10 +2,7 @@ package app.zeri.organizer.service;
 
 import app.zeri.organizer.domain.Project;
 import app.zeri.organizer.domain.repository.ProjectRepository;
-import app.zeri.organizer.exceptions.ProjectAlreadyAssignedToCompany;
-import app.zeri.organizer.exceptions.ProjectDoesNotExistException;
-import app.zeri.organizer.exceptions.TaskAlreadyAddedToProject;
-import app.zeri.organizer.exceptions.UserAlreadyAssignedToProject;
+import app.zeri.organizer.exceptions.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,7 +26,7 @@ public class ProjectService {
         if(projectRepository.existsProjectByProjectNameAndCompanyName(projectName, companyName)) {
             Project project = projectRepository.getProjectByProjectNameAndCompanyName(projectName, companyName);
             if(!project.getUsersAssigned().contains(userEmailAddress)) {
-                project.assignUserToProjct(userEmailAddress);
+                project.assignUserToProject(userEmailAddress);
                 projectRepository.save(project);
             } else {
                 throw new UserAlreadyAssignedToProject();
@@ -55,6 +52,41 @@ public class ProjectService {
     public boolean projectExists(String projectName, String companyName) throws ProjectDoesNotExistException {
         if(projectRepository.existsProjectByProjectNameAndCompanyName(projectName, companyName)) {
             return true;
+        } else {
+            throw new ProjectDoesNotExistException();
+        }
+    }
+
+    public int getCurrentTaskNumber(String projectName, String companyName) throws ProjectDoesNotExistException {
+        if(projectRepository.existsProjectByProjectNameAndCompanyName(projectName, companyName)) {
+            Project project = projectRepository.getProjectByProjectNameAndCompanyName(projectName, companyName);
+            return project.getTasks();
+        } else {
+            throw new ProjectDoesNotExistException();
+        }
+    }
+
+    public boolean userAssignedToProject(String emailAddress, String projectName, String companyName) throws UserNotAssignedToProjectException, ProjectDoesNotExistException {
+        if(projectRepository.existsProjectByProjectNameAndCompanyName(projectName, companyName)) {
+            Project project = projectRepository.getProjectByProjectNameAndCompanyName(projectName, companyName);
+            if(project.getUsersAssigned().contains(emailAddress)) {
+                return true;
+            } else {
+                throw new UserNotAssignedToProjectException();
+            }
+        } else {
+            throw new ProjectDoesNotExistException();
+        }
+    }
+
+    public boolean taskAssignedToProject(String taskName, String projectName, String companyName) throws ProjectDoesNotExistException, TaskDoesNotExistException {
+        if(projectRepository.existsProjectByProjectNameAndCompanyName(projectName, companyName)) {
+            Project project = projectRepository.getProjectByProjectNameAndCompanyName(projectName, companyName);
+            if(project.getTaskNames().contains(taskName)) {
+                return true;
+            } else {
+                throw new TaskDoesNotExistException();
+            }
         } else {
             throw new ProjectDoesNotExistException();
         }
